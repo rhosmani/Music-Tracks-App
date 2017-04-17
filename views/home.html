@@ -1,0 +1,198 @@
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 music-track-section">
+                <div class="input-group search-area">
+                    <input id="search-track-typo" type="text" ng-model="searchTitle" class="search-query form-control" placeholder="Search Title" ng-keyup="$event.keyCode == 13 && searchTrack(searchTitle)" />
+                    <span class="input-group-btn" ng-click="searchTrack(searchTitle)">
+                     <button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-search"></span> </button>
+                    </span>
+                </div>
+                <div>
+                    <div class="table-responsive table-area">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Genre</th>
+                                        <th>Ratings</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-body">
+                                    <tr ng-repeat="track in tracks.results" ng-click="getTrack(track.id);">
+                                        <td>{{track.title}}</td>
+                                        <td>
+                                            <div ng-repeat="genre in track.genres">
+                                                {{genre.name}}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{track.rating}} <span class="glyphicon glyphicon-star"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center btn-area">
+                    <a type="button" data-target="#add-New-Track-popup" data-toggle="modal" class="btn btn-lg btn-primary btn-add" ng-click="addNewTrackMenu(); trackname=null; trackrating=false">Add New Track </a>
+                </div>
+                <div class="text-center nav-button-area">
+                    <button class="nav-btns nav-left" ng-click="pagePrev();"><span class="glyphicon glyphicon-menu-left"></span>Prev</button>
+                    <button class="nav-btns" ng-click="editGenrePopup();">Genre</button>
+                    <button class="nav-btns nav-right" ng-click="pageNext();">Next<span class="glyphicon glyphicon-menu-right"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add track modal start -->
+<div class="modal fade" data-backdrop="static" id="add-New-Track-popup" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add New Track</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval='false'>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <div>
+                                    <label for="name">Title of the Track:</label>
+                                    <input class="modal-input" type="text" name="track-name" id="track-name" tabindex="1" value="{{musicAddEdit.title}}" />
+                                </div>
+                                <div id="track-rating">
+                                    <label for="Rating">Rating of the Track :</label>
+                                    <div class="stars-align">
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="ratings" ng-model="trackrating" value="5" />
+                                            <label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="star4" name="ratings" ng-model="trackrating" value="4" />
+                                            <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="star3" name="ratings" ng-model="trackrating" value="3" />
+                                            <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                            <input type="radio" id="star2" name="ratings" ng-model="trackrating" value="2" />
+                                            <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="star1" name="ratings" ng-model="trackrating" value="1" />
+                                            <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <a class="nav-btn" href="javascript:void(0)" ng-click="continue();">Continue <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                <label ng-show="errorFlag" class="alert-danger">Enter Title of track and rate it</label>
+                            </div>
+                            <div class="item ">
+                                <label for="name">Select Genre:</label>
+                                <div class="row">
+                                    <div class="checkbox col-xs-6" ng-repeat="genre in genres.results">
+                                        <label>
+                                            <input type="checkbox" name="generes" value='{{genre.id}}'>{{genre.name}}</label>
+                                    </div>
+                                    <!--Pagination for genres -->
+                                </div>
+                                <div class="text-center">
+                                    <a class="nav-btn" href="javascript:void(0)" ng-click="pageGNext();">Next</a>
+                                </div>
+                                <a class="btn btn-primary pull-right modal-popup-btn" ng-click="AddNewTrack();">Add Track</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add track modal end -->
+<!-- edit genre modal endstart -->
+<div id="edit-genre-popup" class="modal fade genre-modal-popup" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header genre-modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Track's Genre</h4>
+            </div>
+            <div class="modal-body genre-modal-body">
+                <form action="#" method="post">
+                    <label for="name">Add a new genre:</label>
+                    <div>
+                        <label for="name">Genre:</label>
+                        <input id="genre-name" type="text" class="modal-input" name="genre-name" tabindex="1" ng-model="addGenre" ng-change="showAddGBtn();" />
+                        <input id="genre-id" type="text" class="hide modal-input" name="genre-name" tabindex="1" ng-model="genreId" />
+                        <a class="btn btn-primary pull-right modal-popup-btn" ng-show="showBtn" ng-click="saveGenre('addGenre','genreId');">Add Genre</a>
+                    </div>
+                    <br>
+                    <br>
+                    <label for="name">Edit a Genre:</label>
+                    <div class="row">
+                        <div class="checkbox col-xs-6" ng-repeat="genre in genres.results">
+                            <label id="genre-label-{{genre.id}}" class="genre-label" ng-click="editGenre(genre.id,genre.name)">{{genre.name}}</label>
+                        </div>
+                        <!--Pagination for genres -->
+                    </div>
+                    <div class="text-center">
+                        <a class="nav-btn" href="javascript:void(0)" ng-click="pageGNext();">Next</a>
+                    </div>
+                    <label ng-show="errorFlag" class="alert-danger">Enter Title of track and rate it</label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit genre modal end -->
+<!-- single track popup start -->
+<div id="single-track-popup" data-backdrop="static" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Music Track</h4>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div id="myCarouselSingle" class="carousel slide" data-ride="carousel" data-interval='false'>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <div>
+                                    <div>
+                                        <label for="name">Title of the Track:</label>
+                                        <span>{{music.title}}</span>
+                                        <!-- <input type="text" class="modal-input" name="single-track-name" id="single-track-name" value='{{music.title}}' tabindex="1" /> -->
+                                    </div>
+                                    <div>
+                                        <label for="d-ratings">Rating of the Track :</label>
+                                        <span>{{music.rating}} <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                    <div>
+                                        <label for="name">Genre:</label>
+                                        <span ng-repeat="genre in music.genres">
+                                            {{genre.name}} |
+                                        </span>
+                                    </div>
+                                    <!-- <a class="nav-btn" href="javascript:void(0)" ng-click="addNewGenre();">Add New Genre <span class="glyphicon glyphicon-chevron-right"></span></a> -->
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div>
+                                    <label for="name">Genre:</label>
+                                    <input type="text" class="modal-input" name="genre-name" id="genre-id" tabindex="1" ng-model="addGenre" ng-change="showAddGBtn();" />
+                                    <a class="btn btn-primary pull-right modal-popup-btn" ng-show="showBtn" ng-click="saveGenre(addGenre);">Add Genre</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary modal-popup-btn" ng-click="editTrack(music.id)">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- single track popup end -->

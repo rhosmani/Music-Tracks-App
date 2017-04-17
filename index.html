@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="MusicTrack" ng-cloak>
+
+<head>
+    <title>Music Tracks</title>
+    <link rel="stylesheet" href="assets/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- Specifying Base -->
+    <base href="/musicApp/">
+</head>
+
+<body ng-controller="MainCtrl">
+    <header ng-include="'views/header.html'" scope="" onload=""></header>
+    <div class="body-container">
+        <main ng-view>
+            <!-- Main View -->
+        </main>
+    </div>
+    <footer ng-include="'views/footer.html'" scope="" onload=""></footer>
+</body>
+<script src="assets/libs/jquery-3.2.1.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/libs/angular/angular.min.js"></script>
+<script src="assets/libs/angular/angular-route.min.js"></script>
+<script src="assets/libs/angular/angular-resource.min.js"></script>
+<script src="https://code.angularjs.org/1.6.4/angular-route.min.js"></script>
+<script type="text/javascript" src="assets/js/scripts.js"></script>
+
+</html>

@@ -1,0 +1,175 @@
+display: block;
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+    display: none;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+header {
+    background-color: #BF360C;
+    color: #FFF;
+}
+
+footer {
+    padding: 50px;
+    color: #ddd;
+    background-color: #424242;
+}
+
+.body-container {
+    min-height: 700px;
+}
+
+.music-track-section {}
+
+.music-track-section .search-area {
+    padding: 45px 0;
+}
+
+.music-track-section .search-area button {
+    background-color: #D84315;
+}
+
+.music-track-section .table-area {}
+
+.music-track-section .table-area .table-header {
+    background-color: #FF8A65;
+    color: #FFF;
+    border: none;
+}
+
+.music-track-section .table-area .table-body {
+    color: #444;
+}
+
+.music-track-section .table-area .table>tbody>tr:hover {
+    background-color: #FFAB91;
+}
+
+.music-track-section .table-area .table>tbody>tr>td {
+    border: none;
+}
+
+.music-track-section .btn-area {}
+
+.music-track-section .btn-area>a {
+    background-color: #0091E9;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.music-track-section .nav-button-area {
+    margin: 10px 0;
+}
+
+.music-track-section .nav-button-area .nav-btns {
+    background-color: #FF7043;
+    background: none;
+    border: 1px solid #FF7043;
+    color: #FF7043;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 7px 20px;
+}
+
+.music-track-section .nav-button-area .nav-btns.nav-left {
+    float: left;
+}
+
+.music-track-section .nav-button-area .nav-btns.nav-right {
+    float: right
+}
+
+.genre-modal-popup .genre-modal-body .genre-label-active {
+    background-color: #FFAB91;
+    padding: 5px 20px;
+}
+
+.modal-popup-btn {
+    background-color: #D84315;
+    border-color: #D84315;
+    border-radius: 4px;
+}
+
+.modal-popup-btn:hover,
+.modal-popup-btn:focus {
+    background-color: #FF5722;
+    border-color: #FF5722;
+    border-radius: 4px;
+}
+
+
+/****** Style Star Rating Widget *****/
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+.stars-align {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rating {
+    border: none;
+    float: left;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label,
+
+/* show gold star when clicked */
+
+.rating:not(:checked) > label:hover,
+
+/* hover current star */
+
+.rating:not(:checked) > label:hover ~ label {
+    color: #FFD700;
+}
+
+
+/* hover previous stars in list */
+
+.rating > input:checked + label:hover,
+
+/* hover current star when changing rating */
+
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+
+/* lighten current selection */
+
+.rating > input:checked ~ label:hover ~ label {
+    color: #FFED85;
+}
